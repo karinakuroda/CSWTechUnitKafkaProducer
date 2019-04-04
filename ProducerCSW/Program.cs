@@ -56,7 +56,18 @@ namespace ProducerCSW
             using (var p = new ProducerBuilder<Null, string>(conf).Build())
             {
                 var orderSerialized = JsonConvert.SerializeObject(order);
-                p.BeginProduce("csw-topic", new Message<Null, string> { Value = orderSerialized }, handler);
+                if (order.CountryDestination.Contains("Portugal"))
+                {
+                    p.BeginProduce("csw-topic-portugal", new Message<Null, string> { Value = orderSerialized }, handler);
+                }
+                else if (order.CountryDestination.Contains("Espanha"))
+                {
+                    p.BeginProduce("csw-topic-espanha", new Message<Null, string> { Value = orderSerialized }, handler);
+                }
+                else
+                {
+                    p.BeginProduce("csw-topic", new Message<Null, string> { Value = orderSerialized }, handler);
+                }
                 p.Flush(TimeSpan.FromSeconds(10));
             }
         }

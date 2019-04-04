@@ -8,4 +8,8 @@ docker run -p 2181:2181 -p 9092:9092 --env ADVERTISED_HOST=127.0.0.1 --env ADVER
 4 - Instalar java
 3 - Utilizar os arquivos .bat para gerenciar os topicos e mensagens 
 
-kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic csw-topic
+kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic csw-topic
+
+kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic csw-topic-portugal
+kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic csw-topic-espanha
+
