@@ -1,0 +1,11 @@
+KAFKA
+https://bitbucket.critical.pt/projects/ALCHEMISTSTRAINING/repos/techunits/browse/techunits/kafka.md
+
+Subir via Docker
+1 - Instalar o docker
+2 - Subir kafka e zookeper
+docker run -p 2181:2181 -p 9092:9092 --env ADVERTISED_HOST=127.0.0.1 --env ADVERTISED_PORT=9092 spotify/kafka
+4 - Instalar java
+3 - Utilizar os arquivos .bat para gerenciar os topicos e mensagens 
+
+kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic csw-topic
