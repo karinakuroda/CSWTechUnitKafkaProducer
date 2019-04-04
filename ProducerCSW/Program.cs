@@ -16,16 +16,16 @@ namespace ProducerCSW
                 ProcessMessage(args, order);
 
                 Console.WriteLine("Has Message to send? (Y/N)");
-                if (Console.ReadLine() == "Y")
+                if (Console.ReadLine().ToUpper() == "Y")
                     continue;
                 else
                     break;
             }
         }
 
-        private static Order AskForParameters()
+        private static OrderMessage AskForParameters()
         {
-            var order = new Order();
+            var order = new OrderMessage();
 
             Console.WriteLine("Type the order ID:");
             order.Id = Helper.TryParse<int>(Console.ReadLine());
@@ -44,7 +44,7 @@ namespace ProducerCSW
 
         }
 
-        private static async Task ProcessMessage(string[] args, Order order)
+        private static async Task ProcessMessage(string[] args, OrderMessage order)
         {
             var conf = new ProducerConfig { BootstrapServers = "localhost:9092" };
 

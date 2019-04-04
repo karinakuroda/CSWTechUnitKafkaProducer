@@ -1,6 +1,6 @@
 ﻿namespace ProducerCSW
 {
-    public class Order
+    public class OrderMessage
     {
         public int Id { get; set; }
         public int MerchantId { get; set; }
