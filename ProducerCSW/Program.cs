@@ -1,60 +1,50 @@
 ﻿using Confluent.Kafka;
 using Newtonsoft.Json;
 using System;
-using System.ComponentModel;
-using System.Globalization;
 using System.Threading.Tasks;
 
 namespace ProducerCSW
 {
-    public class Order
-    {
-        public int Id { get; set; }
-        public int MerchantId { get; set; }
-        public string CountryOrigin { get; set; }
-        public string CountryDestination { get; set; }
-        public decimal Amount { get; set; }
-        public int NumberOfItems { get; set; }
-
-    }
-
     class Program
     {
-        public static T TryParse<T>(string inValue)
+        public static void Main(string[] args)
         {
-            try
+            var hasMessageToSend = true;
+            while (hasMessageToSend)
             {
-                TypeConverter converter = TypeDescriptor.GetConverter(typeof(T));
+                var order = AskForParameters();
+                ProcessMessage(args, order);
 
-                return (T)converter.ConvertFromString(null, CultureInfo.InvariantCulture, inValue);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Invalid type!");
-                throw new InvalidCastException();
+                Console.WriteLine("Has Message to send? (Y/N)");
+                if (Console.ReadLine() == "Y")
+                    continue;
+                else
+                    break;
             }
         }
 
-        public static void Main(string[] args)
+        private static Order AskForParameters()
         {
             var order = new Order();
 
             Console.WriteLine("Type the order ID:");
-            order.Id = TryParse<int>(Console.ReadLine());
+            order.Id = Helper.TryParse<int>(Console.ReadLine());
             Console.WriteLine("Type the Merchant ID:");
-            order.MerchantId = TryParse<int>(Console.ReadLine());
+            order.MerchantId = Helper.TryParse<int>(Console.ReadLine());
             Console.WriteLine("Type the Country Origin:");
-            order.CountryOrigin = TryParse<string>(Console.ReadLine());
+            order.CountryOrigin = Helper.TryParse<string>(Console.ReadLine());
             Console.WriteLine("Type the Country Destination:");
-            order.CountryDestination = TryParse<string>(Console.ReadLine());
+            order.CountryDestination = Helper.TryParse<string>(Console.ReadLine());
             Console.WriteLine("Type the Amount:");
-            order.Amount = TryParse<decimal>(Console.ReadLine());
+            order.Amount = Helper.TryParse<decimal>(Console.ReadLine());
             Console.WriteLine("Type the Number of Items:");
-            order.NumberOfItems = TryParse<int>(Console.ReadLine());
+            order.NumberOfItems = Helper.TryParse<int>(Console.ReadLine());
 
-            Process(args, order);
+            return order;
+
         }
-        public static async Task Process(string[] args, Order order)
+
+        private static async Task ProcessMessage(string[] args, Order order)
         {
             var conf = new ProducerConfig { BootstrapServers = "localhost:9092" };
 
