@@ -24,44 +24,49 @@ kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor
 
 ## How Kafka Works
 
-###### Kafka 
-    Distributed streaming platform
+#### Kafka 
+Distributed streaming platform
 
-###### Kafka Broker
-    Typically consists of multiple brokers to maintain load balance. Kafka brokers are stateless, so they use ZooKeeper for maintaining their cluster state.
+#### Kafka Broker
+Typically consists of multiple brokers to maintain load balance. Kafka brokers are stateless, so they use ZooKeeper for maintaining their cluster state.
 
-###### Kafka Cluster 
-    Multiple kafka brokers 
-    2 brokers inside the same machine = Cluster size 2
+#### Kafka Cluster 
+Multiple kafka brokers 
+2 brokers inside the same machine = Cluster size 2
 
-###### Zookeeper 
-    Centralized service for maintaining metadata about a cluster of distributed nodes
-    ZooKeeper service is mainly used to notify producer and consumer about the presence of any new broker in the Kafka system or failure of the broker in the Kafka system. 
+#### Zookeeper 
+Centralized service for maintaining metadata about a cluster of distributed nodes
+ZooKeeper service is mainly used to notify producer and consumer about the presence of any new broker in the Kafka system or failure of the broker in the Kafka system. 
 
-###### Kafka Topics
-    Category of messages.
-    Topics in Kafka are always multi-subscriber; that is, a topic can have zero, one, or many consumers that subscribe to the data written to it.
+#### Kafka Topics
+Category of messages.
 
-###### Topic Partition
+Topics in Kafka are always multi-subscriber; that is, a topic can have zero, one, or many consumers that subscribe to the data written to it.
+
 
 ![](img/log_anatomy.png "Anatomy")
 
 
-###### Producers
-    Producers publish data to the topics of their choice. 
+#### Producers
+Producers publish data to the topics of their choice. 
 ![](img/producerComponent.png "Producer")
-* First get metadata 
-* Then Send Message
 
-###### Message Offset
-    Like a bookmark
-    * Last read message position
-    * maintened by kafka consumer
+    First get metadata 
+    Then Send Message
 
-###### Consumers
-    Consumer instances can be in separate processes or on separate machines.
-    If all the consumer instances have the same consumer group, then the records will effectively be load balanced over the consumer instances.
-    If all the consumer instances have different consumer groups, then each record will be broadcast to all the consumer processes.
+#### Message Offset
+Like a bookmark
+  
+    Last read message position
+    Maintened by kafka consumer
+
+#### Consumers
+Consumer instances can be in separate processes or on separate machines.
+
+>If all the consumer instances have the same consumer group, then the records will effectively be load balanced over the consumer instances.
+
+If all the consumer instances have different consumer groups, then each record will be broadcast to all the consumer processes.
+
 
 
 ###### How does Kafka scale consumers?
@@ -72,6 +77,9 @@ kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor
 >Leaders perform all reads and writes to a particular topic partition. Followers replicate leaders.
 
 
+
 ### Links
 * https://bitbucket.critical.pt/projects/ALCHEMISTSTRAINING/repos/techunits/browse/techunits/kafka.md
-
+* http://cloudurable.com/blog/kafka-architecture-topics/index.html
+* https://www.tutorialspoint.com/apache_kafka/apache_kafka_cluster_architecture.htm
+* https://kafka.apache.org/intro
